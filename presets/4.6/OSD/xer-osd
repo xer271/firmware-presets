@@ -15,7 +15,7 @@
 #$ DESCRIPTION: Information
 #$ DESCRIPTION: -----------
 #$ DESCRIPTION: 
-#$ DESCRIPTION: You will also need to select "VTX (MSP + Displayport) on the appropriate port in the ports tab.
+#$ DESCRIPTION: Also needs hdz preset applied
 #$ DESCRIPTION: And yes there is an HDzero MSP-OSD preset already
 
 #$ INCLUDE: presets/4.4/osd/defaults.txt
