@@ -18,9 +18,13 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
 
-    - if: github.ref != 'refs/heads/master' || github.repository_owner != 'betaflight' 
+    - if: (github.ref != 'refs/heads/master' || github.repository_owner != 'betaflight') && github.repository_owner != 'xer'
       name: Run the checker script
       run: ./scripts/build.sh
+
+    - if: github.repository_owner = 'xer'
+      name: Run the checker script, indexer
+      run: ./scripts/build.sh deploy
 
     - if: github.ref == 'refs/heads/master' && github.repository_owner == 'betaflight' 
       name: Run the checker, indexer and deployment script
