@@ -25,12 +25,12 @@ jobs:
     - if: github.repository_owner == 'xer271'
       name: Run the indexer
       run: |
-      node indexer/indexer.js
-      git config --global user.name "github-actions[bot]"
-      git config --global user.email "github-actions[bot]@users.noreply.github.com"
-      git add .
-      git commit -m "Auto-update indexer output"
-      git push origin HEAD:${{ github.ref_name }}
+        node indexer/indexer.js
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        git add .
+        git commit -m "Auto-update indexer output"
+        git push origin HEAD:${{ github.ref_name }}
 
     - if: github.ref == 'refs/heads/master' && github.repository_owner == 'betaflight' 
       name: Run the checker, indexer and deployment script
