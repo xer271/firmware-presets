@@ -22,11 +22,6 @@ jobs:
       name: Run the checker script
       run: ./scripts/build.sh
 
-    - if: github.repository_owner = 'xer271' 
-      name: Index and Check
-      run: node indexer/indexer.js
-      run: node indexer/check.js
-
     - if: github.ref == 'refs/heads/master' && github.repository_owner == 'betaflight' 
       name: Run the checker, indexer and deployment script
       run: ./scripts/build.sh deploy
