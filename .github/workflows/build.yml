@@ -18,9 +18,30 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
 
-    - if: github.ref != 'refs/heads/master' || github.repository_owner != 'betaflight' 
+    - if: github.ref != 'refs/heads/master' || github.repository_owner != 'betaflight'
       name: Run the checker script
       run: ./scripts/build.sh
+
+    - if: github.repository_owner == 'xer271'
+      name: Run the indexer and push changes
+      run: |
+        node indexer/indexer.js
+
+        # Configure Git
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+        # Check for changes
+        if [[ -n $(git status --porcelain) ]]; then
+          echo "Changes detected, committing..."
+          git add .
+          git commit -m "Auto-update indexer output"
+          git push origin HEAD:${{ github.ref_name }}
+        else
+          echo "No changes to commit."
+        fi
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - if: github.ref == 'refs/heads/master' && github.repository_owner == 'betaflight' 
       name: Run the checker, indexer and deployment script
